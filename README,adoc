@@ -1,0 +1,20 @@
+# Circlenetic Custom Build Caddy with Coraza WAF Module
+
+## Build Docker Image
+
+```bash
+docker buildx build --progress plain --no-cache -t reidlai/coraza-caddy .
+```
+
+## Deployment
+
+### Caddy Proxy with Coraza WAF
+
+#### Run custom build Caddy with Coraza WAF module using docker
+
+```bash
+mkdir -p /tmp/data /tmp/conifg
+cd <this project root>
+docker run -d -p 8080:8080 -v ./caddy/Caddyfile.local:/etc/caddy/Caddyfile -v ./caddy/crs-setup.conf:/etc/coraza/crs-setup.conf -v /tmp/data:/data -v /tmp/config:/config reidlai/coraza-caddy
+npm run dev
+```
